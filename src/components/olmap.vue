@@ -5,8 +5,7 @@
 <script>
     import 'ol/ol.css'
     import { Map,View} from 'ol';
-    import TileLayer from 'ol/layer/Tile'
-    import OSM from  'ol/source/OSM'
+    import mapconfig from '../config/map_config'
     export default {
         name: "olmap",
         data(){
@@ -18,15 +17,11 @@
             this.$nextTick(()=>{
                 this.map = new Map({
                     target: this.$refs.rootmap,
-                    layers: [
-                        new TileLayer({
-                            source: new OSM()
-                        })
-                    ],
+                    layers:mapconfig.streetmap(),
                     view: new View({
                         projection: "EPSG:4326",
-                        center: [114.064839,22.548857],
-                        zoom:12
+                        center: [mapconfig.x,mapconfig.y],
+                        zoom:mapconfig.zoom
                     })
                 })
             })

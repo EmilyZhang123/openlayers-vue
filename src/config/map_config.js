@@ -1,0 +1,36 @@
+import TileLayer from "ol/layer/Tile";
+import TileArcGISRest from "ol/source/TileArcGISRest";
+import OSM from 'ol/source/OSM';
+import XYZ from "ol/source/XYZ";
+let maptype = 2;
+let streetmap = ()=> {
+    let maplayer = null;
+    switch (maptype) {
+        case 0:
+            maplayer = new TileLayer({
+                source: new XYZ({
+                    url: 'http://127.0.0.1:7080/streetmap/shenzhen/{z}/{x}/{y}.jpg'
+                })
+            });
+            break;
+        case 1:
+            maplayer = new TileLayer({
+                source: new OSM()
+            });
+            break;
+        case 2:
+            maplayer = new TileLayer({
+                source: new TileArcGISRest({
+                    url: 'https://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineCommunity/MapServer'
+                })
+            });
+        break;
+    }
+    return [maplayer]
+};
+export default  {
+    x:114.064839,     //中心点经度和纬度
+    y:22.548857,
+    zoom:15,          //地图缩放级别
+    streetmap
+};
