@@ -27,7 +27,7 @@ MarkDown语法学习
 
 ###![图片alt](图片地址 ''图片title'')
 
-![示例](src/assets/logo.png "示例")
+![示例](../src/assets/logo.png "示例")
 
 ###[超链接名](超链接地址 "超链接title")
 
