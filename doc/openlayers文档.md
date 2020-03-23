@@ -13,3 +13,7 @@
 
 ##API查阅方法
 ![图片](api查看.png 'api查看')
+
+
+##openLayers3 坐标系
+目前openLayers 3支持两种投影，一个是EPSG:4326，等同于WGS84坐标系，参见详情。另一个是EPSG:3857，等同于900913，由Mercator投影而来，经常用于web地图，参见详情。一个是全球通用的，一个是web地图专用的，自然OpenLayers 3支持它们。在使用过程中，需要注意OpenLayers 3默认使用的是EPSG:3857。

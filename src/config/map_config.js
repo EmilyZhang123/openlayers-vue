@@ -29,7 +29,7 @@ let street_map = ()=> {
     return [map_layer]
 };
 export default  {
-    center:[0,0],
-    zoom:1,          //地图缩放级别
+    center:[104.06,30.67],
+    zoom:10,          //地图缩放级别
     street_map
 };
