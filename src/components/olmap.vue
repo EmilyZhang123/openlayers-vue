@@ -32,7 +32,7 @@
                 this.map = new Map({
                     target: this.$refs.rootmap, // 设置地图的容器
                     // logo: {src:'../assets/logo.png'},
-                    layers:map_config.street_map(4), // 设置地图图层
+                    layers:map_config.street_map(5), // 设置地图图层
                     view: view
                 })
               /*  this.map1 = new Map({

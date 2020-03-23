@@ -2,7 +2,7 @@ import TileLayer from "ol/layer/Tile";
 import TileArcGISRest from "ol/source/TileArcGISRest";
 import { OSM,BingMaps,XYZ,Stamen } from 'ol/source'
 //图层 maptype [number] 图层类型
-let street_map = (maptype)=> {
+let street_map = maptype => {
     let map_layer = null;
     switch (maptype) {
         // 0表示部署的离线瓦片地图
@@ -45,6 +45,31 @@ let street_map = (maptype)=> {
                     layer: 'watercolor'
                 })
             })
+            break;
+        // 百度地图
+        case 5:
+            map_layer = new TileLayer({
+                source: new XYZ({
+                    getTilePixelRatio:2,
+                    tileUrlFunction: tileCoord =>{
+                        // tileCoord为瓦片坐标
+                        let [z,x,y] = tileCoord;
+                        let halfTileNum = Math.pow(2,z-1); // 计算当前层级下瓦片总数的一半，用于定位整个地图的中心点
+                        // 原点移到中心点后，计算xy方向上新的坐标位置
+                        let baiduX = x - halfTileNum;
+                        let baiduY = y + halfTileNum;
+                        // 百度瓦片服务url将负数使用M前缀来标识
+                        if (baiduX < 0){
+                            baiduX = 'M' + (-baiduX);
+                        }
+                        if (baiduY < 0){
+                            baiduY = 'M' + (-baiduY)
+                        }
+                        return 'http://online2.map.bdimg.com/onlinelabel/?qt=tile&x=' + baiduX + '&y=' + baiduY + '&z=' + z + '&styles=pl&udt=20160321&scaler=2&p=0';
+                    }
+                })
+            })
+
     }
     return [map_layer]
 };
