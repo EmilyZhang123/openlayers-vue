@@ -26,13 +26,13 @@
                     zoom:map_config.zoom, // 定义地图的缩放
                     //限制地图缩放级别
                     minZoom:5,
-                    maxZoom:11
+                    maxZoom:20
                 }) // 设置地图的视图
                 // 创建地图
                 this.map = new Map({
                     target: this.$refs.rootmap, // 设置地图的容器
                     // logo: {src:'../assets/logo.png'},
-                    layers:map_config.street_map(5), // 设置地图图层
+                    layers:map_config.street_map(1), // 设置地图图层
                     view: view
                 })
               /*  this.map1 = new Map({

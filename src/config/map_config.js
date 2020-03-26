@@ -1,6 +1,8 @@
-import TileLayer from "ol/layer/Tile";
-import TileArcGISRest from "ol/source/TileArcGISRest";
-import { OSM,BingMaps,XYZ,Stamen } from 'ol/source'
+import TileLayer from "ol/layer/Tile"
+import {TileArcGISRest,TileDebug} from "ol/source"
+import TileGrid from 'ol/tilegrid/TileGrid'
+import { transform } from 'ol/proj'
+import { OSM,BingMaps,XYZ,Stamen,TileImage } from 'ol/source'
 //图层 maptype [number] 图层类型
 let street_map = maptype => {
     let map_layer = null;
@@ -17,9 +19,17 @@ let street_map = maptype => {
             break;
         // Open Street Map地图层
         case 1:
-            map_layer = new TileLayer({
-                source: new OSM()
-            });
+            map_layer = [
+                new TileLayer({
+                    source: new OSM()
+                }),
+                new TileLayer({
+                    source: new  TileDebug({
+                        projection: 'EPSG:3857',
+                        tileGrid: new OSM().getTileGrid()
+                    })
+                }),
+            ];
             break;
         // 表示使用Arcgis在线午夜蓝地图服务
         case 2:
@@ -69,12 +79,42 @@ let street_map = maptype => {
                     }
                 })
             })
+            break;
+        case 6: {
+            let resolutions = [];
+            let maxZoom = 18;
+            for (let i = 0; i <= maxZoom; i++){
+                resolutions[i] = Math.pow(2,maxZoom - 1)
+            }
+            map_layer = new TileLayer({
+                source: new TileImage({
+                    projection: 'EPSG:3857',
+                    tileGrid: new TileGrid({
+                        origin: [0,0],
+                        resolutions:resolutions,
+                    }),
+                    tileUrlFunction:(tileCoord)=>{
+                        let [x,y,z] = tileCoord;
+                        if (x < 0){
+                            x = 'M' + (-x);
+                        }
+                        if (y < 0){
+                            y = 'M' + (-y)
+                        }
+                        return "http://online0.map.bdimg.com/onlinelabel/?qt=tile&x="+x+"&y="+y+"&z="+z+"&styles=pl&udt=20160426&scaler=1&p=0";
+                    }
+                })
+            })
+        }
+
 
     }
-    return [map_layer]
+    return Array.isArray(map_layer)? map_layer : [map_layer]
+    // return [map_layer]
 };
 export default  {
-    center:[104.06,30.67],
+    // center:[104.06,30.67],
+    center:transform([104.06, 30.67], 'EPSG:4326', 'EPSG:3857'),
     zoom:10,          //地图缩放级别
     street_map
 };
