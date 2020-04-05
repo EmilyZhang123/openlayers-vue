@@ -29,7 +29,6 @@
         this.initMap()
           .then(() =>{
             this.map.on('singleclick',(e)=>{
-            console.log(1);
               this.singleClick(e)
             })
           });
@@ -38,7 +37,6 @@
     methods: {
       initMap(){
         return new Promise((resolve,reject)=>{
-
           this.map = new Map({
             target: this.$refs.rootMap,
             layers: [
@@ -98,6 +96,8 @@
   border: 1px solid #cccccc;
   bottom: 45px;
   left: -50px;
+  word-break: keep-all;
+  white-space: nowrap;
 }
 
 .ol-popup:after, .ol-popup:before {
