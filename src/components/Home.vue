@@ -18,6 +18,9 @@
           {name:'overlayLearn',text:'overlay学习'}
         ],
       }
+
+    },
+    mounted() {
     }
   }
 </script>

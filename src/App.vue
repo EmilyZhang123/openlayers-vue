@@ -1,13 +1,24 @@
 <template>
   <div id="app">
+    <h1>
+      <header-my v-if="routeName !== 'home'"/>
+    </h1>
     <router-view/>
   </div>
 </template>
 
 <script>
+  import HeaderMy from './components/HeaderMy'
 export default {
   name: 'App',
-
+  components:{
+    HeaderMy
+  },
+  computed:{
+    routeName(){
+      return this.$route.name
+    }
+  }
 }
 </script>
 
