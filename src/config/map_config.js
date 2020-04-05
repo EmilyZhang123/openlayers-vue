@@ -3,6 +3,7 @@ import {TileArcGISRest,TileDebug} from "ol/source"
 import TileGrid from 'ol/tilegrid/TileGrid'
 import { transform } from 'ol/proj'
 import { OSM,BingMaps,XYZ,Stamen,TileImage } from 'ol/source'
+import {View} from "ol";
 //图层 maptype [number] 图层类型
 let street_map = maptype => {
     let map_layer = null;
@@ -23,12 +24,12 @@ let street_map = maptype => {
                 new TileLayer({
                     source: new OSM()
                 }),
-                new TileLayer({
+               /* new TileLayer({
                     source: new  TileDebug({
                         projection: 'EPSG:3857',
                         tileGrid: new OSM().getTileGrid()
                     })
-                }),
+                }),*/
             ];
             break;
         // 表示使用Arcgis在线午夜蓝地图服务
@@ -110,11 +111,17 @@ let street_map = maptype => {
 
     }
     return Array.isArray(map_layer)? map_layer : [map_layer]
-    // return [map_layer]
 };
 export default  {
-    // center:[104.06,30.67],
-    center:transform([104.06, 30.67], 'EPSG:4326', 'EPSG:3857'),
-    zoom:10,          //地图缩放级别
-    street_map
+    layers: street_map(1),
+    view: new View({
+        projection: "EPSG:4326",
+        // extent: [102, 29, 104, 31], // 设置地图的中心范围
+        // center: transform([104.06, 30.67], 'EPSG:4326', 'EPSG:3857'), // 定义地图显示中心的经纬度
+        center: [104,30],
+        zoom: 10, // 定义地图的缩放
+        //限制地图缩放级别
+        minZoom: 1,
+        maxZoom: 20
+    }) // 设置地图的视图
 };

@@ -36,7 +36,8 @@
     "rules": {
       "vue/no-unused-components": ["warn", {
         "ignoreWhenBindingPresent": true
-      }]
+      }],
+      "no-unused-vars": "warn"
     }
   },
   "browserslist": [

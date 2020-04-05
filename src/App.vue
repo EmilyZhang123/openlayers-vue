@@ -1,14 +1,17 @@
 <template>
   <div id="app">
-    <olmap/>
+<!--    <olmap/>-->
+    <map-learning> </map-learning>
   </div>
 </template>
 
 <script>
 import olmap from "./components/olmap";
+import MapLearning from './components/MapLearning'
 export default {
   name: 'App',
   components: {
+    MapLearning,
     olmap
   }
 }
