@@ -4,6 +4,8 @@
     <div id="popup" class="ol-popup" ref="popup">
       <a href="#" id="popup-closer" ref="popupClose" class="ol-popup-closer" @click="close_popup"> </a>
       <div id="popup-content" ref="popContent" v-html="contentText"></div>
+
+      
     </div>
   </div>
 </template>
