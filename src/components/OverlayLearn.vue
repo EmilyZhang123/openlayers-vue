@@ -4,18 +4,18 @@
     <div id="popup" class="ol-popup" ref="popup">
       <a href="#" id="popup-closer" ref="popupClose" class="ol-popup-closer" @click="close_popup"> </a>
       <div id="popup-content" ref="popContent" v-html="contentText"></div>
-
-      
     </div>
+    <div ref="vienna" id="vienna"></div>
   </div>
 </template>
 
 <script>
   import 'ol/ol.css'
+  import ol from '../assets/ol'
   import { Map, View, Overlay,  } from 'ol'
-  import { TileJSON } from 'ol/source'
+  import { TileJSON, OSM } from 'ol/source'
   import TileLayer  from 'ol/layer/Tile'
-  import { toLonLat } from 'ol/proj'
+  import { toLonLat, fromLonLat } from 'ol/proj'
   import { toStringHDMS } from 'ol/coordinate'
   export default {
     name: "MpaLearning",
@@ -30,6 +30,7 @@
       this.$nextTick(()=>{
         this.initMap()
           .then(() =>{
+            console.log(this.map.getOverlayById('vienna'))
             this.map.on('singleclick',(e)=>{
               this.singleClick(e)
             })
@@ -39,9 +40,14 @@
     methods: {
       initMap(){
         return new Promise((resolve,reject)=>{
-          this.map = new Map({
+          this.map = new ol.Map({
             target: this.$refs.rootMap,
-            layers: [
+            layers:[
+              new TileLayer({
+                source: new OSM()
+              })
+            ],
+           /* layers: [
               new TileLayer({
                 source: new TileJSON({
                   // 把tile的信息保存在一条json当中
@@ -50,12 +56,21 @@
                   crossOrigin: 'anonymous'
                 })
               })
-            ],
+            ],*/
             view: new View({
               center: [0, 0],
               zoom: 2
-            })
+            }),
           });
+          this.map.addOverlay(
+            new Overlay({
+              id: 'vienna',
+              position: fromLonLat([16.3725, 48.208889]), // fromLonLat 把经纬度坐标转换成（x,y）米
+              element: this.$refs.vienna,
+              positioning: 'center-center',
+              stopEvent:false,
+            })
+          )
           resolve();
         })
       },
@@ -69,7 +84,7 @@
           id:'one',
           element: this.$refs.popup,
           position:coordinate,
-          positioning:'center-center', // overlay 对于 position 的相对位置，可能的值包括 bottom-left、bottom-center、bottom-right 、center-left、center-center、center-right、top-left、top-center、top-right，默认是 top-left，也就是 element 左上角与 position 重合；
+          positioning: 'center-center', // overlay 对于 position 的相对位置，可能的值包括 bottom-left、bottom-center、bottom-right 、center-left、center-center、center-right、top-left、top-center、top-right，默认是 top-left，也就是 element 左上角与 position 重合；
           autoPan: true, // 当触发 overlay setPosition 方法时触发，当 overlay 超出地图边界时，地图自动移动，以保证 overlay 全部可见
           autoPanAnimation: {
             duration: 250
@@ -78,6 +93,7 @@
         let hdms = toStringHDMS(toLonLat(coordinate)); // 转换成经纬度坐标，并格式化
         this.contentText = `<p>你点击了这里</p><code>${hdms}</code>`;
         this.map.addOverlay(oneOverlay)
+        console.log(this.map.getOverlayById('one'))
       }
     }
   }
@@ -88,6 +104,14 @@
   width: 100%;
   height: 90%;
 }
+#vienna {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #088;
+  border-radius: 10px;
+  background-color: #0ff;
+  opacity: 0.5;
+}
 .ol-popup {
   position: absolute;
   background-color: white;
@@ -96,7 +120,7 @@
   padding: 15px;
   border-radius: 10px;
   border: 1px solid #cccccc;
-  bottom: 45px;
+  bottom: 12px;
   left: -50px;
   word-break: keep-all;
   white-space: nowrap;
