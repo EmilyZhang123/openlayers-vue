@@ -1,6 +1,4 @@
 import TileLayer from "ol/layer/Tile"
-import 'ol/ol.js'
-// import ol from 'ol'
 import {TileArcGISRest,TileDebug} from "ol/source"
 import TileGrid from 'ol/tilegrid/TileGrid'
 import { transform } from 'ol/proj'

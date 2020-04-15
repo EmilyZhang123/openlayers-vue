@@ -11,9 +11,8 @@
 
 <script>
   import 'ol/ol.css'
-  import ol from '../assets/ol'
   import { Map, View, Overlay,  } from 'ol'
-  import { TileJSON, OSM } from 'ol/source'
+  import { TileJSON, OSM, BingMaps } from 'ol/source'
   import TileLayer  from 'ol/layer/Tile'
   import { toLonLat, fromLonLat } from 'ol/proj'
   import { toStringHDMS } from 'ol/coordinate'
@@ -30,7 +29,6 @@
       this.$nextTick(()=>{
         this.initMap()
           .then(() =>{
-            console.log(this.map.getOverlayById('vienna'))
             this.map.on('singleclick',(e)=>{
               this.singleClick(e)
             })
@@ -40,11 +38,15 @@
     methods: {
       initMap(){
         return new Promise((resolve,reject)=>{
-          this.map = new ol.Map({
+          this.map = new Map({
             target: this.$refs.rootMap,
             layers:[
               new TileLayer({
                 source: new OSM()
+               /* source: new BingMaps({
+                  key: 'AkjzA7OhS4MIBjutL21bkAop7dc41HSE0CNTR5c6HJy8JKc7U9U9RveWJrylD3XJ',
+                  imagerySet: 'RoadOnDemand'
+                })*/
               })
             ],
            /* layers: [
@@ -59,18 +61,20 @@
             ],*/
             view: new View({
               center: [0, 0],
-              zoom: 2
+              zoom: 6,
+              maxZoom: 15,
+              minZoom: 4,
             }),
           });
-          this.map.addOverlay(
+       /*   this.map.addOverlay(
             new Overlay({
               id: 'vienna',
               position: fromLonLat([16.3725, 48.208889]), // fromLonLat 把经纬度坐标转换成（x,y）米
               element: this.$refs.vienna,
               positioning: 'center-center',
-              stopEvent:false,
+              stopEvent:true,
             })
-          )
+          )*/
           resolve();
         })
       },
@@ -88,7 +92,8 @@
           autoPan: true, // 当触发 overlay setPosition 方法时触发，当 overlay 超出地图边界时，地图自动移动，以保证 overlay 全部可见
           autoPanAnimation: {
             duration: 250
-          }
+          },
+          stopEvent:false,
         });
         let hdms = toStringHDMS(toLonLat(coordinate)); // 转换成经纬度坐标，并格式化
         this.contentText = `<p>你点击了这里</p><code>${hdms}</code>`;

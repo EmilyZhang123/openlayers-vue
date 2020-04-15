@@ -8,6 +8,7 @@ export default new VueRouter({
     { path: '/', redirect: { name: 'home' } },
     { path: '/home',name: 'home',component: ()=>import('./components/Home') },
     { path: '/overlay',name: 'overlayLearn',component: ()=>import('./components/OverlayLearn') },
+    { path: '/control',name: 'controlMap',component: ()=>import('./components/ControlMap') },
 
   ]
 })

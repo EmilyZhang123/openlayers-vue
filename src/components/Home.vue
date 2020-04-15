@@ -15,7 +15,8 @@
     data() {
       return {
         routes:[
-          {name:'overlayLearn',text:'overlay学习'}
+          {name:'overlayLearn',text:'overlay学习'},
+          {name:'controlMap',text:'控件'},
         ],
       }
 
