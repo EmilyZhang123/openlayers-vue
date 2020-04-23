@@ -17,9 +17,9 @@
         routes:[
           {name:'overlayLearn',text:'overlay学习'},
           {name:'controlMap',text:'控件'},
+          {name:'graticule',text:'网格'},
         ],
       }
-
     },
     mounted() {
     }

@@ -38,9 +38,6 @@
         },
         methods:{
             initMap(){
-
-
-
                 return new Promise(resolve=>{
                     this.map = new Map({
                         target:this.$refs.map,

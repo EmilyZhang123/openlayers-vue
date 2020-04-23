@@ -9,6 +9,7 @@ export default new VueRouter({
     { path: '/home',name: 'home',component: ()=>import('./components/Home') },
     { path: '/overlay',name: 'overlayLearn',component: ()=>import('./components/OverlayLearn') },
     { path: '/control',name: 'controlMap',component: ()=>import('./components/ControlMap') },
+    { path: '/graticule',name: 'graticule',component: ()=>import('./components/Graticule') },
 
   ]
 })
