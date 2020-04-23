@@ -10,9 +10,10 @@
 
 <script>
     import 'ol/ol.css'
-    import {Map,View} from 'ol'
+    import {Map,View,} from 'ol'
     import TileLayer from 'ol/layer/Tile'
     import {OSM} from 'ol/source'
+    import {defaults} from 'ol/interaction'
     export default {
         name: "ControlMap",
         data(){
@@ -22,23 +23,43 @@
         },
         mounted() {
             this.$nextTick(()=>{
-                this.initMap()
+                this.initMap().then(()=>{
+                    console.log(this.map)
+                    this.map.on('moveend',()=>{
+                        console.log(this.map.getView().getZoom())
+                    })
+                })
+               /* this.initMap(()=>{
+                    this.map('on',()=>{
+                        console.log(this.map.getView().getZoom())
+                    })
+                })*/
             })
         },
         methods:{
             initMap(){
-                this.map = new Map({
-                    target:this.$refs.map,
-                    layers:[
-                        new TileLayer({
-                            source: new OSM()
-                        })
-                    ],
-                    view: new View({
-                        center:[0,0],
-                        zoom:2,
+
+
+
+                return new Promise(resolve=>{
+                    this.map = new Map({
+                        target:this.$refs.map,
+                        layers:[
+                            new TileLayer({
+                                source: new OSM()
+                            })
+                        ],
+                        view: new View({
+                            center:[0,0],
+                            zoom:2,
+                        }),
+                        interactions: defaults(({
+                            onFocusOnly: true,
+                        }))
                     })
+                    resolve();
                 })
+
             },
             zoomMap(flag){
                 let view = this.map.getView();
