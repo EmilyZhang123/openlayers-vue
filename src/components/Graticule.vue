@@ -20,13 +20,16 @@
       mounted() {
          this.$nextTick(()=>{
             this.initMap(()=>{
+              // setMap() 实现 Graticule类与map的关联
                (new Graticule({
-                  strokeStyle: new Stroke({
-                     color:'red',
-                     width:1,
-                     lineDash:[4]
+                    strokeStyle: new Stroke({
+                       color:'red',
+                       width:1,
+                       lineDash:[4]
+                    }),
+                   showLabels:false, // 是否显示文字标签
                   })
-               })).setMap(this.map)
+               ).setMap(this.map)
             })
          })
       },

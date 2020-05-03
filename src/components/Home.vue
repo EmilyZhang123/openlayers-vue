@@ -1,5 +1,5 @@
 <template>
-  <div style="text-align: left">
+  <div style="text-align: left;padding-left: 20px">
     <h2>导航</h2>
     <ul>
       <li v-for = "route in routes" :key = "route.name">
@@ -20,6 +20,7 @@
           {name:'graticule',text:'网格'},
           {name:'advancedPositioning',text:'高级视图定位'},
           {name:'viewAnimate',text:'动画'},
+          {name:'heatMap',text:'热力图'},
         ],
       }
     },

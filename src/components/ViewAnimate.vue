@@ -5,6 +5,7 @@
     <el-button size="small" @click="handleCommand(3)">绕着北京旋转</el-button>
     <el-button size="small" @click="handleCommand(4)">平移到上海</el-button>
     <el-button size="small" @click="handleCommand(5)">旋转到上海</el-button>
+    <el-button size="small" @click="handleCommand(6)">setRotation</el-button>
     <hr>
     <div id="map"></div>
   </div>
@@ -124,6 +125,10 @@
               easing: easeOut
             }
           )
+        }
+        if (num === 6){
+          // 无动画效果
+          this.view.setRotation(Math.PI/6)
         }
       }
     }

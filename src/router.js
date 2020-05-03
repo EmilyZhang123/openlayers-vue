@@ -12,5 +12,6 @@ export default new VueRouter({
     { path: '/graticule',name: 'graticule',component: ()=>import('./components/Graticule') },
     { path: '/advancedPositioning',name: 'advancedPositioning',component: ()=>import('./components/AdvancedPositioning') },
     { path: '/viewAnimate',name: 'viewAnimate',component: ()=>import('./components/ViewAnimate') },
+    { path: '/heatMap',name: 'heatMap',component: ()=>import('./components/HeatMap') },
   ]
 })
