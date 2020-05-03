@@ -11,5 +11,6 @@ export default new VueRouter({
     { path: '/control',name: 'controlMap',component: ()=>import('./components/ControlMap') },
     { path: '/graticule',name: 'graticule',component: ()=>import('./components/Graticule') },
     { path: '/advancedPositioning',name: 'advancedPositioning',component: ()=>import('./components/AdvancedPositioning') },
+    { path: '/viewAnimate',name: 'viewAnimate',component: ()=>import('./components/ViewAnimate') },
   ]
 })

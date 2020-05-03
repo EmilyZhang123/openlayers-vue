@@ -19,6 +19,7 @@
           {name:'controlMap',text:'控件'},
           {name:'graticule',text:'网格'},
           {name:'advancedPositioning',text:'高级视图定位'},
+          {name:'viewAnimate',text:'动画'},
         ],
       }
     },
