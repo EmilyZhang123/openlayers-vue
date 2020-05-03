@@ -33,7 +33,7 @@
       methods: {
          initMap(callback){
             this.map = new Map({
-               target:this.$refs.map,
+               target:'map',
                view: new View({
                   center:fromLonLat([4.8,47.75]), // 将经纬度坐标转换成x,y坐标
                   zoom:5

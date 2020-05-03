@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import 'ol/ol.css'
+import './assets/scss/index.scss'
 
 Vue.config.productionTip = false;
 import router from "./router";
