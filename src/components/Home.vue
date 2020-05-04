@@ -22,6 +22,7 @@
           {name:'viewAnimate',text:'动画'},
           {name:'heatMap',text:'热力图'},
           {name:'controls',text:'controls'},
+          {name:'layers',text:'layers'},
         ],
       }
     },

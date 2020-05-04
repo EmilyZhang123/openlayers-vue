@@ -14,5 +14,6 @@ export default new VueRouter({
     { path: '/viewAnimate',name: 'viewAnimate',component: ()=>import('./components/ViewAnimate') },
     { path: '/heatMap',name: 'heatMap',component: ()=>import('./components/HeatMap') },
     { path: '/controls',name: 'controls',component: ()=>import('./components/Controls') },
+    { path: '/layers',name: 'layers',component: ()=>import('./components/Layers') },
   ]
 })
