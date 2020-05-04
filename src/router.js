@@ -13,5 +13,6 @@ export default new VueRouter({
     { path: '/advancedPositioning',name: 'advancedPositioning',component: ()=>import('./components/AdvancedPositioning') },
     { path: '/viewAnimate',name: 'viewAnimate',component: ()=>import('./components/ViewAnimate') },
     { path: '/heatMap',name: 'heatMap',component: ()=>import('./components/HeatMap') },
+    { path: '/controls',name: 'controls',component: ()=>import('./components/Controls') },
   ]
 })

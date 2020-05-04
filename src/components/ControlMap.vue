@@ -40,7 +40,7 @@
             initMap(){
                 return new Promise(resolve=>{
                     this.map = new Map({
-                        target:this.$refs.map,
+                        target:'map',
                         layers:[
                             new TileLayer({
                                 source: new OSM()

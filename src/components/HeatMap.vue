@@ -73,7 +73,7 @@
       },
       radiusChange(val){
         this.radius = val;
-        this.vector.setBlur(parseInt(val));
+        this.vector.setRadius(parseInt(val));
       },
       blurChange(val){
         this.blur = val;
