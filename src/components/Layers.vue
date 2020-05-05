@@ -2,9 +2,10 @@
   <div>
     <el-row :gutter="24">
       <el-col :span="6">
-        OSM图层
+        <el-button size="small" @click="setZIndex">OSM图层</el-button>
         <el-checkbox v-model="osmVisible" @change="(val)=>valChange(val,'osm','visible')">可见</el-checkbox>
         透明度<el-slider v-model="osmOpacity" :min="0" :max="1" :step="0.1" @change="(val)=>valChange(val,'osm','opacity')" style="display: inline-block;width: 100px"> </el-slider>
+
       </el-col>
       <el-col :span="18">
         图层组<el-checkbox v-model="groupVisible" @change="(val)=>valChange(val,'group','visible',)">可见</el-checkbox>
@@ -110,6 +111,14 @@
           }
         });
       },
+      setZIndex(){
+        this.map.getLayers().forEach((item,i) => {
+          if (i === 0){
+            item.setZIndex(5)
+           console.log(item.getZIndex())
+          }
+        })
+      }
     }
   }
 </script>
