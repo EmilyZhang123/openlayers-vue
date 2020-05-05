@@ -15,5 +15,7 @@ export default new VueRouter({
     { path: '/heatMap',name: 'heatMap',component: ()=>import('./components/HeatMap') },
     { path: '/controls',name: 'controls',component: ()=>import('./components/Controls') },
     { path: '/layers',name: 'layers',component: ()=>import('./components/Layers') },
+    { path: '/layersTwo',name: 'layersTwo',component: ()=>import('./components/LayersTwo') },
+    { path: '/vectorLayer',name: 'vectorLayer',component: ()=>import('./components/VectorLayer') },
   ]
 })

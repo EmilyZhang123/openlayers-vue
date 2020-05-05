@@ -66,6 +66,8 @@
             }),
             new LayerGroup({
               className: 'group',
+              minResolution: 2000,
+              maxResolution: 20000,
               layers:[
                 new TileLayer({
                   className: 'food',
@@ -112,6 +114,8 @@
         });
       },
       setZIndex(){
+        // zIndex 相等时，按照加入layers的顺序
+        // zIndex 不等时，较大的排在上面
         this.map.getLayers().forEach((item,i) => {
           if (i === 0){
             item.setZIndex(5)
